@@ -448,7 +448,8 @@ class Base {
   }
   getThirdPartyUserIdFromMatrixGhostId(matrixGhostId) {
     const patt = new RegExp(`^@${this.getServicePrefix()}_(.+)$`);
-    const localpart = matrixGhostId.replace(':'+this.domain, '');
+    let localpart = matrixGhostId.replace(':'+this.domain, '');
+    localpart = localpart.replace('=40', '@').replace('=2b', '+');
     const matches = localpart.match(patt);
     return matches ? matches[1] : null;
   }
